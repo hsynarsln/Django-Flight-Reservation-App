@@ -16,7 +16,7 @@ class RegisterAPI(CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        user = serializer.save()
         #!-----------Token key ekleme--------------
         token = Token.objects.create(user=user)
         data = serializer.data

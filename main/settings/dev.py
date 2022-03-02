@@ -2,6 +2,8 @@ import os
 
 from .base import *
 
+DEBUG = config('DEBUG')
+
 THIRD_PARTY_APPS = [
     "debug_toolbar",
 ]

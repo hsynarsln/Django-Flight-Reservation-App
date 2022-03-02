@@ -1,3 +1,4 @@
+from dj_rest_auth.serializers import TokenSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers, validators
@@ -50,3 +51,22 @@ class RegisterSerializer(serializers.ModelSerializer):
                 {"password": "Password fields didn't match."})
 
         return data
+
+
+#! Loginde token ile kullanıcı bilgilerini almak için
+class UserTokenSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ("id", "first_name", "last_name", "email")
+
+#! Login yaptığımız zaman token ile diğer user bilgilerini de göndermek istiyoruz.
+
+
+class CustomTokenSerializer(TokenSerializer):
+
+    user = UserTokenSerializer(read_only=True)
+
+    class Meta(TokenSerializer.Meta):
+        fields = ("key", "user")
+        #! user'ın bilgilerini göndermek için user field'ını ekliyoruz.

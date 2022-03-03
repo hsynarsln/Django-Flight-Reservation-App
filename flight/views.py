@@ -1,6 +1,5 @@
 from datetime import date, datetime
 
-from django.shortcuts import render
 from rest_framework import viewsets
 
 from .models import Flight, Reservation
@@ -12,8 +11,8 @@ from .serializers import (FlightSerializer, ReservationSerializer,
 class FlightView(viewsets.ModelViewSet):
     queryset = Flight.objects.all()
     serializer_class = FlightSerializer
-    # ! Tuple kullandığımız için sonunda virgül koymak önemli
     permission_classes = (IsStuffOrReadOnly,)
+    # ! Tuple kullandığımız için sonunda virgül koymak önemli
 
     #! staff userlar için farklı serializer
     def get_serializer_class(self):

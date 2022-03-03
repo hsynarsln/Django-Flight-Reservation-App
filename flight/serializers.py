@@ -36,9 +36,9 @@ class ReservationSerializer(serializers.ModelSerializer):
     #! flight id frontend'den seçilip gönderilecek bilgi
     flight = serializers.PrimaryKeyRelatedField(queryset=Flight.objects.all())
     #! ---------- OR ------------
-    # ?-------------------------------------------
-    # ?-------------------------------------------
     # flight_id = serializers.IntegerField(write_only=True)
+    # ?-------------------------------------------
+    # ?-------------------------------------------
     user = serializers.StringRelatedField()
     #! ---------- OR ------------
     user_id = serializers.IntegerField(write_only=True, required=False)
@@ -71,6 +71,8 @@ class ReservationSerializer(serializers.ModelSerializer):
             #! add --> metodu mantTomany den geliyor.
         reservation.save()
 
+        return reservation
+
 
 #! Staff user'lar için ayrı bir flight serializer oluşturuyoruz.
 class StaffFlightSerializer(serializers.ModelSerializer):
@@ -87,5 +89,5 @@ class StaffFlightSerializer(serializers.ModelSerializer):
             'arrivalCity',
             'dateOfDeparture',
             'estimatedTimeOfDeparture',
-            'reservation'
+            'reservations'
         )

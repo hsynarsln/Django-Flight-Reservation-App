@@ -65,8 +65,10 @@ class UserTokenSerializer(serializers.ModelSerializer):
 
 class CustomTokenSerializer(TokenSerializer):
 
+    #! Django yukarıdan aşağıya çalıştığı için UserTokenSerializer'ı yukarıda tanımlıyoruz.
     user = UserTokenSerializer(read_only=True)
 
     class Meta(TokenSerializer.Meta):
         fields = ("key", "user")
+        #! key --> token
         #! user'ın bilgilerini göndermek için user field'ını ekliyoruz.

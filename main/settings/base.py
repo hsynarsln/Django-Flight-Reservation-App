@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     # myapps
     'users',
+    'flight',
 ]
 
 MIDDLEWARE = [
